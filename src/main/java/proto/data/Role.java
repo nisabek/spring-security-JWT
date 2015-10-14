@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package hello.data;
+package proto.data;
 
 import java.util.HashSet;
 import java.util.Set;

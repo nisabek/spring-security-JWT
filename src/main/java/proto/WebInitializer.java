@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package hello;
+package proto;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package hello;
+package proto;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,9 +38,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-/**
- * @author Roy Clarkson
- */
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = Application.class)
@@ -100,10 +98,8 @@ public class GreetingControllerTest {
 				.andExpect(jsonPath("$.expires_in", is(greaterThan(4000))))
 				.andExpect(jsonPath("$.scope", is(equalTo("read write"))))
 				.andReturn().getResponse().getContentAsString();
-
 		// @formatter:on
-
-		return content.substring(17, 53);
+		return content.substring(17, content.indexOf(",")-1);
 	}
 
 	@Test

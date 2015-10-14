@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package hello;
+package proto.userservice;
 
 import java.util.Collection;
 
-import hello.data.User;
-import hello.data.UserRepository;
+import proto.data.User;
+import proto.data.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

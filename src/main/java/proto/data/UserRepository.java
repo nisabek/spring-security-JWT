@@ -14,25 +14,11 @@
  * limitations under the License.
  */
 
-package hello;
+package proto.data;
 
-public class Greeting {
+import org.springframework.data.repository.CrudRepository;
 
-	private final long id;
+public interface UserRepository extends CrudRepository<User, Long> {
 
-	private final String content;
-
-	public long getId() {
-		return id;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public Greeting(long id, String content) {
-		this.id = id;
-		this.content = content;
-	}
-
+	User findByLogin(String login);
 }
