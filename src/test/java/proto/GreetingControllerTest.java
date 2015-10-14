@@ -32,6 +32,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.context.WebApplicationContext;
+import proto.data.Role;
+import proto.data.User;
+import proto.data.UserRepository;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -55,15 +61,43 @@ public class GreetingControllerTest {
 
 	private MockMvc mvc;
 
+	@Autowired
+	UserRepository userRepository;
+
 	@Before
 	public void setUp() {
+
+        userRepository.deleteAll();
+
+            createInitialData();
+
 		MockitoAnnotations.initMocks(this);
 		mvc = MockMvcBuilders.webAppContextSetup(context)
 				.addFilter(springSecurityFilterChain)
 				.build();
 	}
 
-	@Test
+    private void createInitialData() {
+        //create roles (not in DB)
+        Role userRole = new Role("USER");
+        Role adminRole = new Role("ADMIN");
+        Role guestRole = new Role("GUEST");
+
+        HashSet<Role> userAndAdmin = new HashSet<>();
+        userAndAdmin.add(userRole);
+        userAndAdmin.add(adminRole);
+
+        User roy = new User("Roy", "roy", "spring", userAndAdmin);
+        userRepository.save(roy);
+
+        User craig = new User("Craig", "craig", "spring", new HashSet<Role>(){{ add(userRole); }});
+        userRepository.save(craig);
+
+        User greg = new User("Greg", "greg", "spring", new HashSet<Role>(){{ add(guestRole); }});
+        userRepository.save(greg);
+    }
+
+    @Test
 	public void greetingUnauthorized() throws Exception {
 		// @formatter:off
 		mvc.perform(get("/greeting")

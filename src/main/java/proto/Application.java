@@ -16,8 +16,15 @@
 
 package proto;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import proto.data.Role;
+import proto.data.User;
+import proto.data.UserRepository;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @SpringBootApplication
 public class Application {

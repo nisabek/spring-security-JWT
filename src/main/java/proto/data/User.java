@@ -19,40 +19,27 @@ package proto.data;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-
+import org.bson.types.ObjectId;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.Id;
 
-@Entity
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private ObjectId id;
 
 	@NotEmpty
 	private String name;
 
 	@NotEmpty
-	@Column(unique = true, nullable = false)
 	private String login;
 
 	@NotEmpty
 	private String password;
 
 	@JsonIgnore
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
 	private Set<Role> roles = new HashSet<Role>();
 
 	public User() {
@@ -67,11 +54,18 @@ public class User {
 		this.roles = user.getRoles();
 	}
 
-	public Integer getId() {
+	public User(String name, String login, String password, Set<Role> roles) {
+		this.name = name;
+		this.login = login;
+		this.password = password;
+		this.roles = roles;
+	}
+
+	public ObjectId getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(ObjectId id) {
 		this.id = id;
 	}
 

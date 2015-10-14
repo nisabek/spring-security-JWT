@@ -25,14 +25,13 @@ repositories {
 }
 
 dependencies {
-//	compile("org.springframework.boot:spring-boot-starter-tomcat")
 	compile("org.springframework.boot:spring-boot-starter-web")
+//	compile("org.mongeez:mongeez:0.9.4")
 	compile("org.springframework.boot:spring-boot-starter-security")
-	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	compile 'org.springframework.data:spring-data-mongodb:1.8.0.RELEASE'
 	compile ('org.springframework.security:spring-security-jwt:1.0.3.RELEASE')
 	compile("org.springframework.security.oauth:spring-security-oauth2:2.0.7.RELEASE")
 	compile("com.fasterxml.jackson.core:jackson-databind")
-	compile("org.hsqldb:hsqldb")
 	testCompile("org.springframework.boot:spring-boot-starter-test")
 	testCompile("com.jayway.jsonpath:json-path")
 	testCompile("com.jayway.jsonpath:json-path-assert:0.9.1")

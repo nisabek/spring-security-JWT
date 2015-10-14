@@ -19,44 +19,34 @@ package proto.data;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-
+import org.bson.types.ObjectId;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.data.annotation.Id;
 import org.springframework.security.core.GrantedAuthority;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
 public class Role implements GrantedAuthority {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private ObjectId id;
 
 	@NotEmpty
 	private String name;
 
-	@JsonIgnore
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
-	private Set<User> users = new HashSet<User>();
 
 	@Override
 	public String getAuthority() {
 		return name;
 	}
 
-	public Integer getId() {
+	public ObjectId getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(ObjectId id) {
 		this.id = id;
 	}
 
@@ -68,12 +58,12 @@ public class Role implements GrantedAuthority {
 		this.name = name;
 	}
 
-	public Set<User> getUsers() {
-		return users;
+	public Role(String name) {
+		this.name = name;
 	}
 
-	public void setUsers(Set<User> users) {
-		this.users = users;
+	@Override
+	public String toString() {
+		return name;
 	}
-
 }

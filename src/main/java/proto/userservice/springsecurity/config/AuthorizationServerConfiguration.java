@@ -53,7 +53,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .inMemory()
                 .withClient("clientapp")
                 .authorizedGrantTypes("password", "refresh_token")
-                .authorities("USER")
+                .authorities("USER", "ADMIN")
                 .scopes("read", "write")
                 .accessTokenValiditySeconds(60 * 60 * 24)
                 .refreshTokenValiditySeconds(60 * 60 * 24 * 5)
